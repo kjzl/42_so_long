@@ -6,7 +6,7 @@
 /*   By: kwurster <kwurster@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:33:29 by kwurster          #+#    #+#             */
-/*   Updated: 2024/06/20 22:03:27 by kwurster         ###   ########.fr       */
+/*   Updated: 2024/06/21 13:08:26 by kwurster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <errno.h>
+# include <math.h>
 
 t_bool	parse_map(int fd, t_level *out, t_level_info *out_info);
 

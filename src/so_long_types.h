@@ -6,16 +6,15 @@
 /*   By: kwurster <kwurster@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 21:41:51 by kwurster          #+#    #+#             */
-/*   Updated: 2024/06/20 23:07:08 by kwurster         ###   ########.fr       */
+/*   Updated: 2024/06/21 13:13:05 by kwurster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_TYPES_H
 # define SO_LONG_TYPES_H
 
-# include "../libft/libft.h"
-# include "../minilibx/mlx.h"
-# include <stdlib.h>
+# include <libft.h>
+# include <mlx.h>
 
 typedef struct s_pos {
 	size_t	x;

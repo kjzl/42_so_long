@@ -32,6 +32,7 @@ NAME = so_long
 CFLAGS = -g -Og -fanalyzer
 
 LIBFTDIR = ./libft
+MLXDIR = ./minilibx
 
 SRCS = \
 	src/parse/parse.c\
@@ -45,13 +46,14 @@ SRCS = \
 OBJ = $(SRCS:.c=.o)
 
 %.o: %.c
-	cc $(CFLAGS) -c -I$(LIBFTDIR) $< -o $@
+	cc $(CFLAGS) -c -I$(LIBFTDIR) -I$(MLXDIR) $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(MAKE) -C $(LIBFTDIR) CFLAGS='$(CFLAGS)'
-	cc $(CFLAGS) $(OBJ) -L$(LIBFTDIR) -lft -o $(NAME)
+	$(MAKE) -C $(MLXDIR)
+	cc $(CFLAGS) $(OBJ) -L$(LIBFTDIR) -lft -L$(MLXDIR) -lmlx -lXext -lX11 -lm -o $(NAME)
 
 debug: CFLAGS += -DDEBUG
 debug: all
@@ -61,6 +63,7 @@ debug: all
 
 clean:
 	$(MAKE) -C $(LIBFTDIR) clean
+	$(MAKE) -C $(MLXDIR) clean
 	rm -f $(OBJ)
 
 fclean: clean
