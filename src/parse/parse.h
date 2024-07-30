@@ -6,7 +6,7 @@
 /*   By: kwurster <kwurster@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:56:22 by kwurster          #+#    #+#             */
-/*   Updated: 2024/06/20 23:07:03 by kwurster         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:40:35 by kwurster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define ERR_LEVEL_UNREACHABLE_COINS	0b0100000000
 # define ERR_LEVEL_UNREACHABLE_EXIT		0b1000000000
 
-t_bool	parse_map(int fd, t_level *out, t_level_info *out_info);
-t_bool	validate_level(const t_level *level, t_level_info *out_info);
+t_bool	parse_map(int fd, t_level *out, t_levelinfo *out_info);
+t_bool	validate_level(const t_level *level, t_levelinfo *out_info);
 
 #endif

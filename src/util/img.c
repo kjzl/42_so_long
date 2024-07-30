@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pos.c                                              :+:      :+:    :+:   */
+/*   img.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwurster <kwurster@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 12:25:00 by kwurster          #+#    #+#             */
-/*   Updated: 2024/06/30 04:59:40 by kwurster         ###   ########.fr       */
+/*   Created: 2024/06/22 17:10:17 by kwurster          #+#    #+#             */
+/*   Updated: 2024/06/23 00:42:53 by kwurster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "util.h"
 
-t_bool	pos_is_on_edge(t_upoint pos, t_upoint x_y_max)
+void	iteri_img_destroy(t_vec *vec, size_t i, void *mlx)
 {
-	return (pos.x == 0 || pos.y == 0 || pos.x == x_y_max.x
-			|| pos.y == x_y_max.y);
+	img_destroy(mlx, vec_get_at(vec, i));
 }

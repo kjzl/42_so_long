@@ -6,7 +6,7 @@
 /*   By: kwurster <kwurster@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 11:10:00 by kwurster          #+#    #+#             */
-/*   Updated: 2024/06/21 00:22:52 by kwurster         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:45:06 by kwurster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	level_iter(const t_level *level, tile_iter iter, void *extra)
 		x = 0;
 		while (x < level->width)
 		{
-			iter((t_pos){x, y}, (t_pos){level->width - 1, level->height - 1},
+			iter((t_upoint){x, y}, (t_upoint){level->width - 1, level->height - 1},
 					level->tiles[y][x], extra);
 			x++;
 		}
@@ -55,7 +55,7 @@ t_bool	vec_strs_into_level(t_vec *vec, t_level *out)
 	if (!vec_strs_into_cstrs(vec))
 	{
 		vec_destroy(vec, iter_str_destroy);
-		return (false);
+		return (FALSE);
 	}
 	out->tiles = vec_take(vec);
 	if (out->tiles == 0)
@@ -77,12 +77,12 @@ t_bool	level_clone(const t_level *level, t_level *out)
 	*out = *level;
 	tmp = vec_new_from(level->tiles, sizeof(char *), level->height);
 	if (!vec_cstrs_clone(&tmp, &tmp))
-		return (false);
+		return (FALSE);
 	out->tiles = vec_take(&tmp);
 	if (out->tiles == 0)
 	{
 		vec_destroy(&tmp, iter_ptr_free);
-		return (false);
+		return (FALSE);
 	}
-	return (true);
+	return (TRUE);
 }

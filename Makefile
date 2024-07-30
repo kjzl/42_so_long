@@ -35,10 +35,18 @@ LIBFTDIR = ./libft
 MLXDIR = ./minilibx
 
 SRCS = \
+	src/img/img_buffered.c\
+	src/img/img_op.c\
+	src/img/img_rect_op.c\
+	src/img/img_rect.c\
+	src/img/img.c\
 	src/parse/parse.c\
 	src/parse/validate.c\
+	src/util/color.c\
+	src/util/img.c\
 	src/util/level_info.c\
 	src/util/level.c\
+	src/util/mlx.c\
 	src/util/pos.c\
 	src/util/tile.c\
 	src/so_long.c\

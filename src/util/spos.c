@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pos.c                                              :+:      :+:    :+:   */
+/*   spos.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwurster <kwurster@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 12:25:00 by kwurster          #+#    #+#             */
-/*   Updated: 2024/06/30 04:59:40 by kwurster         ###   ########.fr       */
+/*   Created: 2024/06/22 22:06:39 by kwurster          #+#    #+#             */
+/*   Updated: 2024/06/30 04:59:33 by kwurster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "util.h"
 
-t_bool	pos_is_on_edge(t_upoint pos, t_upoint x_y_max)
+t_bool	spos_is_neg(t_point var)
 {
-	return (pos.x == 0 || pos.y == 0 || pos.x == x_y_max.x
-			|| pos.y == x_y_max.y);
+	return (var.x < 0 || var.y < 0);
 }

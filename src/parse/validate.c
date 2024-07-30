@@ -6,17 +6,17 @@
 /*   By: kwurster <kwurster@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 19:12:44 by kwurster          #+#    #+#             */
-/*   Updated: 2024/06/21 00:27:08 by kwurster         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:45:06 by kwurster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static void	validate_level_iter(t_pos pos, t_pos x_y_max, char tile, void *info)
+static void	validate_level_iter(t_upoint pos, t_upoint x_y_max, char tile, void *info)
 {
-	t_level_info	*level_info;
+	t_levelinfo	*level_info;
 
-	level_info = (t_level_info *)info;
+	level_info = (t_levelinfo *)info;
 	if (pos_is_on_edge(pos, x_y_max) && tile != WALL)
 		level_info->errs |= ERR_LEVEL_NO_WALLS;
 	if (tile == COIN)
@@ -44,7 +44,7 @@ static void	validate_level_iter(t_pos pos, t_pos x_y_max, char tile, void *info)
 /// @param level The level to scan (scanned positions will be set to 0).
 /// @param info The level_info to remove reachable coins from and set the errs.
 /// @param pos The position to start the flood fill from.
-static void	flood_fill(t_level *level, t_level_info *info, t_pos pos)
+static void	flood_fill(t_level *level, t_levelinfo *info, t_upoint pos)
 {
 	if (level->tiles[pos.y][pos.x] == ' ' || level->tiles[pos.y][pos.x] == WALL)
 		return ;
@@ -53,10 +53,10 @@ static void	flood_fill(t_level *level, t_level_info *info, t_pos pos)
 	else if (level->tiles[pos.y][pos.x] == EXIT)
 		info->errs &= ~ERR_LEVEL_UNREACHABLE_EXIT;
 	level->tiles[pos.y][pos.x] = ' ';
-	flood_fill(level, info, (t_pos){pos.x - 1, pos.y});
-	flood_fill(level, info, (t_pos){pos.x + 1, pos.y});
-	flood_fill(level, info, (t_pos){pos.x, pos.y - 1});
-	flood_fill(level, info, (t_pos){pos.x, pos.y + 1});
+	flood_fill(level, info, (t_upoint){pos.x - 1, pos.y});
+	flood_fill(level, info, (t_upoint){pos.x + 1, pos.y});
+	flood_fill(level, info, (t_upoint){pos.x, pos.y - 1});
+	flood_fill(level, info, (t_upoint){pos.x, pos.y + 1});
 }
 
 /// @brief
@@ -64,17 +64,17 @@ static void	flood_fill(t_level *level, t_level_info *info, t_pos pos)
 /// @param info
 /// @note On error the level will be replaced with the flood filled level.
 /// @return
-static t_bool	validate_level_win_path(const t_level *level, t_level_info *info)
+static t_bool	validate_level_win_path(const t_level *level, t_levelinfo *info)
 {
-	t_level_info	info_copy;
+	t_levelinfo	info_copy;
 	t_level			level_copy;
 
 	if (!level_clone(level, &level_copy))
-		return (false);
+		return (FALSE);
 	if (!level_info_clone(info, &info_copy))
 	{
 		level_destroy(&level_copy);
-		return (false);
+		return (FALSE);
 	}
 	info_copy.errs |= ERR_LEVEL_UNREACHABLE_EXIT;
 	flood_fill(&level_copy, &info_copy, info_copy.start);
@@ -94,7 +94,7 @@ static t_bool	validate_level_win_path(const t_level *level, t_level_info *info)
 /// [x] The map must be closed/surrounded by walls. If it’s not, the program must return an error.
 /// [x] The map can be composed of only these 5 characters
 /// [x] You must be able to parse any kind of map, as long as it respects the above rules.
-t_bool	validate_level(const t_level *level, t_level_info *out_info)
+t_bool	validate_level(const t_level *level, t_levelinfo *out_info)
 {
 	*out_info = level_info_empty();
 	level_iter(level, validate_level_iter, out_info);
@@ -105,6 +105,6 @@ t_bool	validate_level(const t_level *level, t_level_info *out_info)
 	if (out_info->coins.len == 0 && !out_info->coins.mem_err)
 		out_info->errs |= ERR_LEVEL_NO_COINS;
 	if (out_info->errs || out_info->coins.mem_err)
-		return (false);
+		return (FALSE);
 	return (validate_level_win_path(level, out_info));
 }
