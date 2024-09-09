@@ -12,14 +12,16 @@
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+# pragma once
 
-# include "mlximg/mlximg.h"
+# include "../minilibx/mlx.h"
 # include "so_long_types.h"
+# include "mlximg/mlximg.h"
 # include "util/util.h"
+# include "loop/loop.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
-# include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -27,8 +29,12 @@
 
 t_bool	parse_map(int fd, t_level *out, t_levelinfo *out_info);
 
-// typedef struct s_entity {
+void	win(t_gamestate *st);
 
-// }
+void	init_assets(t_gamestate *st);
+void	update_scaled_assets(t_gamestate *st);
+void	destroy_assets(t_gamestate *st);
+void	reset_game(t_gamestate *st);
+void	gamestate_destroy(t_gamestate *st);
 
 #endif

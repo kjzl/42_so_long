@@ -31,11 +31,11 @@ void	mlximg_vec_destroy(void *mlx, t_vec *mlximgs)
 	vec_destroy(mlximgs, 0);
 }
 
-t_bool	mlximg_from_xpm_split(void *mlx, const char *path, t_size size,
-			t_vec *out)
-{
-	t_mlximg	xpm;
-	
-	return (mlximg_from_xpm(mlx, path, &xpm)
-		&& mlximg_split_sprite(mlx, &xpm, size, out));
-}
+// t_bool	mlximg_from_xpm_split(void *mlx, const char *path, t_size size,
+// 			t_vec *out)
+// {
+// 	t_mlximg	xpm;
+
+// 	return (mlximg_from_xpm(mlx, path, &xpm)
+// 		&& mlximg_split_sprite(mlx, &xpm, size, out));
+// }

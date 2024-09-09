@@ -12,23 +12,33 @@
 
 #include "util.h"
 
-t_bool	is_no_tile_at(const char *c)
+t_bool	is_no_tile_at(const uint8_t *c)
 {
-	return (!(*c == WALL || *c == EMPTY || *c == COIN || *c == EXIT
+	return (!(*c == WALL || *c == FLOOR || *c == COIN || *c == EXIT
 			|| *c == START));
 }
 
-t_bool	is_tile_at(const char *c)
+t_bool	is_tile_at(const uint8_t *c)
 {
 	return (!is_no_tile_at(c));
 }
 
-t_bool	is_tile(char c)
+t_bool	is_tile(uint8_t c)
 {
-	return (c == WALL || c == EMPTY || c == COIN || c == EXIT || c == START);
+	return (c == WALL || c == FLOOR || c == COIN || c == EXIT || c == START);
 }
 
-t_bool	is_no_tile(char c)
+t_bool	is_no_tile(uint8_t c)
 {
 	return (!is_tile(c));
 }
+
+t_bool	tile_can_be_walked_on(uint8_t c)
+{
+	return (c == FLOOR || c == COIN || c == EXIT || c == START);
+}
+
+// t_object	object_at(t_gamestate *st, t_point tile)
+// {
+
+// }

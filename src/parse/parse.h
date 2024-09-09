@@ -12,6 +12,7 @@
 
 #ifndef PARSE_H
 # define PARSE_H
+# pragma once
 
 # include "../so_long.h"
 

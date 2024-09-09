@@ -12,7 +12,7 @@
 
 #include "util.h"
 
-void	level_iter(const t_level *level, tile_iter iter, void *extra)
+void	level_iter(const t_level *level, t_tile_iter iter, void *extra)
 {
 	size_t	x;
 	size_t	y;
@@ -23,8 +23,8 @@ void	level_iter(const t_level *level, tile_iter iter, void *extra)
 		x = 0;
 		while (x < level->width)
 		{
-			iter((t_upoint){x, y}, (t_upoint){level->width - 1, level->height - 1},
-					level->tiles[y][x], extra);
+			iter((t_upoint){x, y}, (t_upoint){level->width - 1, level->height
+				- 1}, level->tiles[y][x], extra);
 			x++;
 		}
 		y++;

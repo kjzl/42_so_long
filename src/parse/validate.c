@@ -12,7 +12,8 @@
 
 #include "parse.h"
 
-static void	validate_level_iter(t_upoint pos, t_upoint x_y_max, char tile, void *info)
+static void	validate_level_iter(t_upoint pos, t_upoint x_y_max, uint8_t tile,
+		void *info)
 {
 	t_levelinfo	*level_info;
 
@@ -33,7 +34,7 @@ static void	validate_level_iter(t_upoint pos, t_upoint x_y_max, char tile, void 
 			level_info->errs |= ERR_LEVEL_MULTI_EXIT;
 		level_info->exit = pos;
 	}
-	else if (tile != WALL && tile != EMPTY)
+	else if (tile != WALL && tile != FLOOR)
 		level_info->errs |= ERR_LEVEL_UNRECOGNIZED_TILE;
 }
 
@@ -67,7 +68,7 @@ static void	flood_fill(t_level *level, t_levelinfo *info, t_upoint pos)
 static t_bool	validate_level_win_path(const t_level *level, t_levelinfo *info)
 {
 	t_levelinfo	info_copy;
-	t_level			level_copy;
+	t_level		level_copy;
 
 	if (!level_clone(level, &level_copy))
 		return (FALSE);
@@ -88,12 +89,6 @@ static t_bool	validate_level_win_path(const t_level *level, t_levelinfo *info)
 	return (info->errs == 0);
 }
 
-/// validate_level:
-/// [x] The map has to be constructed with 3 components: walls, collectibles, and free space.
-/// [x] The map must contain 1 exit, at least 1 collectible, and 1 starting position to be valid.
-/// [x] The map must be closed/surrounded by walls. If it’s not, the program must return an error.
-/// [x] The map can be composed of only these 5 characters
-/// [x] You must be able to parse any kind of map, as long as it respects the above rules.
 t_bool	validate_level(const t_level *level, t_levelinfo *out_info)
 {
 	*out_info = level_info_empty();

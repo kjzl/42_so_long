@@ -41,7 +41,7 @@ static void	display_parse_err(int errs, const t_level *level)
 
 static t_bool	map_size_valid(size_t width, size_t height)
 {
-	return (width >= 3 && height >= 3 && width * height >= 3*5);
+	return (width >= 3 && height >= 3 && width * height >= 3 * 5);
 }
 
 /// @brief This function reads the level from the file descriptor

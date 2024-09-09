@@ -29,27 +29,36 @@
 
 NAME = so_long
 # CFLAGS = -Wall -Wextra -Werror -O3 -flto
-CFLAGS = -g -Og -fanalyzer
+CFLAGS = -g -Og
 
 LIBFTDIR = ./libft
 MLXDIR = ./minilibx
 
 SRCS = \
-	src/img/img_buffered.c\
-	src/img/img_op.c\
-	src/img/img_rect_op.c\
-	src/img/img_rect.c\
-	src/img/img.c\
-	src/parse/parse.c\
+	src/so_long.c\
+	src/win.c\
+	src/sprite/assets.c\
+	src/util/asset.c\
+	src/render/render_level.c\
+	src/loop/cam.c\
+	src/loop/input.c\
 	src/parse/validate.c\
-	src/util/color.c\
-	src/util/img.c\
-	src/util/level_info.c\
+	src/mlximg/sprite.c\
+	src/loop/collision.c\
+	src/mlximg/mlximg.c\
+	src/render/render_objects.c\
+	src/parse/parse.c\
+	src/render/render.c\
+	src/mlximg/mlximg2.c\
+	src/mlximg/mlximg_split_sprite.c\
 	src/util/level.c\
-	src/util/mlx.c\
 	src/util/pos.c\
 	src/util/tile.c\
-	src/so_long.c\
+	src/util/level_info.c\
+	src/util/img.c\
+	src/util/spos.c\
+	src/util/action.c\
+	src/util/coins.c\
 
 OBJ = $(SRCS:.c=.o)
 

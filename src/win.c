@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   img.c                                              :+:      :+:    :+:   */
+/*   win.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwurster <kwurster@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/22 17:10:17 by kwurster          #+#    #+#             */
-/*   Updated: 2024/06/23 00:42:53 by kwurster         ###   ########.fr       */
+/*   Created: 2024/09/09 00:41:23 by kwurster          #+#    #+#             */
+/*   Updated: 2024/09/09 17:23:31 by kwurster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "util.h"
+#include "so_long.h"
+#include "so_long_types.h"
+#include "util/util.h"
 
-// void	iteri_img_destroy(t_vec *vec, size_t i, void *mlx)
-// {
-// 	img_destroy(mlx, vec_get_at(vec, i));
-// }
+void	win(t_gamestate *st)
+{
+	st->status = WON;
+}
