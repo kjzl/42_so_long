@@ -20,7 +20,7 @@ static t_bool	mlx_img_addr_checked(void *mlximg_data,
 	int	endian;
 
 	*px = (uint32_t *)mlx_get_data_addr(mlximg_data, &bpp, &line_len, &endian);
-	if (bpp != 32 || line_len != width * 4 || endian != 0)
+	if (bpp != 32 || line_len != (int32_t)width * 4 || endian != 0)
 	{
 		ft_printf_fd(2, "Error: Invalid image format\n");
 		return (FALSE);

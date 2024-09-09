@@ -23,8 +23,8 @@ void	level_iter(const t_level *level, t_tile_iter iter, void *extra)
 		x = 0;
 		while (x < level->width)
 		{
-			iter((t_upoint){x, y}, (t_upoint){level->width - 1, level->height
-				- 1}, level->tiles[y][x], extra);
+			iter(upoint(x, y), upoint(level->width - 1, level->height
+				- 1), level->tiles[y][x], extra);
 			x++;
 		}
 		y++;
@@ -39,7 +39,7 @@ void	level_print(const t_level *level, int fd)
 	y = 0;
 	while (y < level->height)
 	{
-		ft_putendl_fd(level->tiles[y], fd);
+		ft_putendl_fd((const char *)level->tiles[y], fd);
 		y++;
 	}
 }

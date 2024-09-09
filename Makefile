@@ -28,8 +28,8 @@
 # re : fclean all
 
 NAME = so_long
-# CFLAGS = -Wall -Wextra -Werror -O3 -flto
-CFLAGS = -g -Og
+CFLAGS = -Wall -Wextra -Werror -O3
+# CFLAGS = -g -Og
 
 LIBFTDIR = ./libft
 MLXDIR = ./minilibx
@@ -38,6 +38,8 @@ SRCS = \
 	src/so_long.c\
 	src/win.c\
 	src/sprite/assets.c\
+	src/sprite/player.c\
+	src/sprite/player2.c\
 	src/util/asset.c\
 	src/render/render_level.c\
 	src/loop/cam.c\

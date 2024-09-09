@@ -17,7 +17,7 @@
 #include "util/util.h"
 #include "render/render.h"
 
-void	gamestate_destroy(t_gamestate *st)
+int32_t	gamestate_destroy(t_gamestate *st)
 {
 	destroy_assets(st);
 	if (st->mlx)
@@ -30,6 +30,8 @@ void	gamestate_destroy(t_gamestate *st)
 	vec_destroy(&st->coins, 0);
 	free(st->mlx);
 	*st = (t_gamestate){0};
+	exit(0);
+	return (0);
 }
 
 int	key_hook(int32_t keycode, t_gamestate *st)
@@ -41,7 +43,7 @@ int	key_hook(int32_t keycode, t_gamestate *st)
 void	reset_game(t_gamestate *st)
 {
 	init_coins(st, &st->levelinfo);
-	st->player.obj = (t_object){.sprite = &st->assets.player,
+	st->player.obj = (t_object){.sprite = &st->assets.player[RIGHT],
 		.tile = st->levelinfo.start};
 	st->status = PREGAME;
 	st->player.moves = 0;
@@ -90,17 +92,16 @@ int	main(int argc, char **argv)
 	}
 	if (parse_map(fd, &state.level, &state.levelinfo))
 	{
-		ft_putendl_fd("MAP OK ✓", 2);
 		init(&state);
 		reset_game(&state);
 	}
 	else
 	{
-		ft_putendl_fd("MAP NOT OK", 2);
 		gamestate_destroy(&state);
 		return (1);
 	}
 	mlx_key_hook(state.mlx_win, key_hook, &state);
+	mlx_hook(state.mlx_win, 17, 0, gamestate_destroy, &state);
 	mlx_loop(state.mlx);
 	return (0);
 }

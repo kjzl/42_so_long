@@ -93,8 +93,8 @@ typedef struct s_assets
 	t_sprite			exit;
 	t_sprite			coin;
 	t_sprite			big_coin;
-	t_sprite			player;
-	t_sprite			player_on_exit;
+	t_sprite			player[4];
+	t_sprite			player_on_exit[4];
 }						t_assets;
 
 typedef enum e_gamestatus

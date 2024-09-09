@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../render/render.h"
+#include "ft_types.h"
 #include "geo/ft_geo.h"
 #include "loop.h"
 
@@ -24,6 +25,12 @@ static void	handle_move(t_gamestate *st, t_action action)
 	[ACTION_LEFT] = {-1, 0},
 	[ACTION_RIGHT] = {1, 0},
 	};
+	static const t_dir	dir_map[ACTION_COUNT] = {
+	[ACTION_UP] = UP,
+	[ACTION_DOWN] = DOWN,
+	[ACTION_LEFT] = LEFT,
+	[ACTION_RIGHT] = RIGHT,
+	};
 
 	if (st->status != PREGAME && st->status != PLAYING)
 		return ;
@@ -32,15 +39,15 @@ static void	handle_move(t_gamestate *st, t_action action)
 	{
 		st->player.obj.tile = point_as_upoint(new_pos);
 		st->player.moves++;
-		if (upoint_eq(st->player.obj.tile, st->levelinfo.exit))
-			st->player.obj.sprite = &st->assets.player_on_exit;
-		else
-			st->player.obj.sprite = &st->assets.player;
 		ft_printf("Moves: %u\n", st->player.moves);
 		cam_update(st);
 		handle_collisions(st);
-		render(st);
 	}
+	if (upoint_eq(st->player.obj.tile, st->levelinfo.exit))
+		st->player.obj.sprite = &st->assets.player_on_exit[dir_map[action]];
+	else
+		st->player.obj.sprite = &st->assets.player[dir_map[action]];
+	render(st);
 }
 
 /// handles restart and exit
@@ -76,6 +83,7 @@ static void	handle_zoom(t_gamestate *st, t_action action)
 /// handles camera mode toggle
 static void	handle_cam_mode_toggle(t_gamestate *st, t_action action)
 {
+	(void)action;
 	if (st->opts.cam_mode == CENTER_PLAYER)
 		st->opts.cam_mode = CENTER_MAP;
 	else

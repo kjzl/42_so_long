@@ -28,11 +28,11 @@ static void	*tile_mlxdata(t_gamestate *st, t_upoint tile)
 
 void	level_render(t_gamestate *st)
 {
-	t_urect		window;
+	t_rect		window;
 	t_upoint	tile;
 	t_point		tile_pt;
 
-	window = urect(st->win_size.width, st->win_size.height);
+	window = rect_at(point(st->opts.scale * -SPRITE_SIZE, st->opts.scale * -SPRITE_SIZE), st->win_size.width + 2 * st->opts.scale * SPRITE_SIZE, st->win_size.height + 2 * st->opts.scale * SPRITE_SIZE);
 	tile.y = 0;
 	while (tile.y < st->level.height)
 	{
@@ -40,11 +40,9 @@ void	level_render(t_gamestate *st)
 		while (tile.x < st->level.width)
 		{
 			tile_pt = tile_pos_abs_offset(st, tile);
-			mlx_put_image_to_window(st->mlx, st->mlx_win, tile_mlxdata(st,
-					tile), tile_pt.x, tile_pt.y);
-			// if (tile_pt.x >= (-SPRITE_SIZE * st->opts.scale) && tile_pt.y >= (-SPRITE_SIZE * st->opts.scale) && urect_contains(window,
-			// 		point_as_upoint(tile_pt)))
-
+			if (rect_contains(window, tile_pt))
+				mlx_put_image_to_window(st->mlx, st->mlx_win, tile_mlxdata(st,
+						tile), tile_pt.x, tile_pt.y);
 			tile.x++;
 		}
 		tile.y++;

@@ -54,10 +54,10 @@ static void	flood_fill(t_level *level, t_levelinfo *info, t_upoint pos)
 	else if (level->tiles[pos.y][pos.x] == EXIT)
 		info->errs &= ~ERR_LEVEL_UNREACHABLE_EXIT;
 	level->tiles[pos.y][pos.x] = ' ';
-	flood_fill(level, info, (t_upoint){pos.x - 1, pos.y});
-	flood_fill(level, info, (t_upoint){pos.x + 1, pos.y});
-	flood_fill(level, info, (t_upoint){pos.x, pos.y - 1});
-	flood_fill(level, info, (t_upoint){pos.x, pos.y + 1});
+	flood_fill(level, info, upoint(pos.x - 1, pos.y));
+	flood_fill(level, info, upoint(pos.x + 1, pos.y));
+	flood_fill(level, info, upoint(pos.x, pos.y - 1));
+	flood_fill(level, info, upoint(pos.x, pos.y + 1));
 }
 
 /// @brief

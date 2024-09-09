@@ -35,6 +35,6 @@ void	init_assets(t_gamestate *st);
 void	update_scaled_assets(t_gamestate *st);
 void	destroy_assets(t_gamestate *st);
 void	reset_game(t_gamestate *st);
-void	gamestate_destroy(t_gamestate *st);
+int32_t	gamestate_destroy(t_gamestate *st);
 
 #endif

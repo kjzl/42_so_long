@@ -49,5 +49,6 @@ t_action		input_map_action(int32_t input);
 
 void			init_coins(t_gamestate *st, t_levelinfo *info);
 void			load_asset_with_bg(t_gamestate *st, t_mlximg *bg, const char *path, t_mlximg *out);
+void			blend_asset_with_bg(t_gamestate *st, t_mlximg *bg, t_mlximg *asset);
 
 #endif
