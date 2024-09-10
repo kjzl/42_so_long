@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   asset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kwurster <kwurster@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/09 17:47:38 by kwurster          #+#    #+#             */
+/*   Updated: 2024/09/10 14:41:07 by kwurster         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "util.h"
 
-void	load_asset_with_bg(t_gamestate *st, t_mlximg *bg, const char *path, t_mlximg *out)
+void	load_asset_with_bg(t_gamestate *st, t_mlximg *bg, const char *path,
+		t_mlximg *out)
 {
 	t_mlximg	tmp;
 

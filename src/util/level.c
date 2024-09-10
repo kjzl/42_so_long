@@ -6,7 +6,7 @@
 /*   By: kwurster <kwurster@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 11:10:00 by kwurster          #+#    #+#             */
-/*   Updated: 2024/06/25 16:45:06 by kwurster         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:41:27 by kwurster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	level_iter(const t_level *level, t_tile_iter iter, void *extra)
 		x = 0;
 		while (x < level->width)
 		{
-			iter(upoint(x, y), upoint(level->width - 1, level->height
-				- 1), level->tiles[y][x], extra);
+			iter(upoint(x, y), upoint(level->width - 1, level->height - 1),
+				level->tiles[y][x], extra);
 			x++;
 		}
 		y++;

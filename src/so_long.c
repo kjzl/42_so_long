@@ -6,16 +6,16 @@
 /*   By: kwurster <kwurster@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:58:58 by kwurster          #+#    #+#             */
-/*   Updated: 2024/06/30 05:18:49 by kwurster         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:41:53 by kwurster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "loop/loop.h"
 #include "printf/ft_printf.h"
+#include "render/render.h"
 #include "so_long.h"
 #include "so_long_types.h"
 #include "util/util.h"
-#include "render/render.h"
 
 int32_t	gamestate_destroy(t_gamestate *st)
 {
@@ -77,7 +77,7 @@ int	main(int argc, char **argv)
 
 	state = (t_gamestate){0};
 	state.opts.scale = 1;
-	state.win_size = (t_size){.height = 720, .width = 1280};
+	state.win_size = size(WIN_WIDTH, WIN_HEIGHT);
 	if (argc != 2 || !strsl_ends_with(cstr_view(argv[1]), cstr_slice(".ber",
 				4)))
 	{
@@ -90,18 +90,11 @@ int	main(int argc, char **argv)
 		perror(argv[1]);
 		return (1);
 	}
-	if (parse_map(fd, &state.level, &state.levelinfo))
-	{
-		init(&state);
-		reset_game(&state);
-	}
-	else
-	{
+	if (!parse_map(fd, &state.level, &state.levelinfo))
 		gamestate_destroy(&state);
-		return (1);
-	}
+	init(&state);
+	reset_game(&state);
 	mlx_key_hook(state.mlx_win, key_hook, &state);
 	mlx_hook(state.mlx_win, 17, 0, gamestate_destroy, &state);
 	mlx_loop(state.mlx);
-	return (0);
 }

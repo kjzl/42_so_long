@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures.c                                         :+:      :+:    :+:   */
+/*   assets.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwurster <kwurster@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 20:01:51 by kwurster          #+#    #+#             */
-/*   Updated: 2024/06/30 05:18:49 by kwurster         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:37:15 by kwurster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	update_scaled_player_assets(t_gamestate *st);
-void	load_player_assets(t_gamestate *st);
-void	destroy_player_assets(t_gamestate *st);
+void		update_scaled_player_assets(t_gamestate *st);
+void		load_player_assets(t_gamestate *st);
+void		destroy_player_assets(t_gamestate *st);
 
 static void	load_base_assets(t_gamestate *st)
 {
 	mlximg_from_xpm(st->mlx, "textures/wall.xpm", &st->assets.wall.base);
 	mlximg_from_xpm(st->mlx, "textures/empty.xpm", &st->assets.floor.base);
-	load_asset_with_bg(st, &st->assets.floor.base, "textures/bigCoin.xpm", &st->assets.big_coin.base);
-	load_asset_with_bg(st, &st->assets.floor.base, "textures/coin.xpm", &st->assets.coin.base);
-	load_asset_with_bg(st, &st->assets.floor.base, "textures/exit.xpm", &st->assets.exit.base);
+	load_asset_with_bg(st, &st->assets.floor.base, "textures/bigCoin.xpm",
+		&st->assets.big_coin.base);
+	load_asset_with_bg(st, &st->assets.floor.base, "textures/coin.xpm",
+		&st->assets.coin.base);
+	load_asset_with_bg(st, &st->assets.floor.base, "textures/exit.xpm",
+		&st->assets.exit.base);
 }
 
 static void	destroy_scaled_assets(t_gamestate *st)

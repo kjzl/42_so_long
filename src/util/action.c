@@ -6,13 +6,13 @@
 /*   By: kwurster <kwurster@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 23:48:37 by kwurster          #+#    #+#             */
-/*   Updated: 2024/09/09 17:23:44 by kwurster         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:29:26 by kwurster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "util.h"
 
-t_action	input_map_action(int32_t	input)
+t_action	map_inp_to_action(int32_t	input)
 {
 	static const uint8_t	map[1 << 16] = {
 	[INPUT_ARROW_UP] = ACTION_UP,

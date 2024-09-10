@@ -14,10 +14,9 @@
 
 static void	display_parse_err(int errs, const t_level *level)
 {
-	ft_putstr_fd("Error", 2);
+	ft_putstr_fd("Error\n", 2);
 	if (errno != 0)
-		ft_printf_fd(2, ": %s", strerror(errno));
-	ft_putchar_fd('\n', 2);
+		perror(0);
 	if (ERR_LEVEL_NO_RECT & errs)
 		ft_putendl_fd("The map must be rectangular (and min 3x5).", 2);
 	if (ERR_LEVEL_UNRECOGNIZED_TILE & errs)

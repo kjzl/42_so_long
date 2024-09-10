@@ -6,7 +6,7 @@
 /*   By: kwurster <kwurster@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 23:40:57 by kwurster          #+#    #+#             */
-/*   Updated: 2024/09/09 17:24:14 by kwurster         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:29:26 by kwurster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,17 @@
 #include "geo/ft_geo.h"
 #include "loop.h"
 
-/// handles movement
 static void	handle_move(t_gamestate *st, t_action action)
 {
 	t_point					new_pos;
 	static const t_point	move_map[ACTION_COUNT] = {
-	[ACTION_UP] = {0, -1},
-	[ACTION_DOWN] = {0, 1},
-	[ACTION_LEFT] = {-1, 0},
-	[ACTION_RIGHT] = {1, 0},
-	};
-	static const t_dir	dir_map[ACTION_COUNT] = {
-	[ACTION_UP] = UP,
-	[ACTION_DOWN] = DOWN,
-	[ACTION_LEFT] = LEFT,
-	[ACTION_RIGHT] = RIGHT,
+	[ACTION_UP] = {0, -1}, [ACTION_DOWN] = {0, 1},
+	[ACTION_LEFT] = {-1, 0}, [ACTION_RIGHT] = {1, 0},
 	};
 
 	if (st->status != PREGAME && st->status != PLAYING)
 		return ;
+	st->status = PLAYING;
 	new_pos = point_add(st->player.obj.tile.point, move_map[action]);
 	if (tile_can_be_walked_on(st->level.tiles[new_pos.y][new_pos.x]))
 	{
@@ -43,28 +35,18 @@ static void	handle_move(t_gamestate *st, t_action action)
 		cam_update(st);
 		handle_collisions(st);
 	}
-	if (upoint_eq(st->player.obj.tile, st->levelinfo.exit))
-		st->player.obj.sprite = &st->assets.player_on_exit[dir_map[action]];
-	else
-		st->player.obj.sprite = &st->assets.player[dir_map[action]];
+	update_used_player_sprite(st, action);
 	render(st);
 }
 
-/// handles restart and exit
-// use void	reset_game(t_gamestate *st);
-// use void	gamestate_destroy(t_gamestate *st);
 static void	handle_stop(t_gamestate *st, t_action action)
 {
 	if (action == ACTION_RESTART)
 		reset_game(st);
 	else
-	{
 		gamestate_destroy(st);
-		exit(0);
-	}
 }
 
-/// handles zoom in and out
 static void	handle_zoom(t_gamestate *st, t_action action)
 {
 	if (st->opts.scale == 1 && action == ACTION_ZOOM_OUT)
@@ -80,7 +62,6 @@ static void	handle_zoom(t_gamestate *st, t_action action)
 	render(st);
 }
 
-/// handles camera mode toggle
 static void	handle_cam_mode_toggle(t_gamestate *st, t_action action)
 {
 	(void)action;
@@ -107,7 +88,7 @@ void	handle_input(t_gamestate *st, int32_t input)
 	[ACTION_CAM_MODE_TOGGLE] = handle_cam_mode_toggle,
 	};
 
-	action = input_map_action(input);
+	action = map_inp_to_action(input);
 	if (handlers[action] != 0)
 		handlers[action](st, action);
 }

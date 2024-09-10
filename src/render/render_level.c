@@ -6,7 +6,7 @@
 /*   By: kwurster <kwurster@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 21:46:40 by kwurster          #+#    #+#             */
-/*   Updated: 2024/09/09 17:23:52 by kwurster         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:40:38 by kwurster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void	level_render(t_gamestate *st)
 	t_upoint	tile;
 	t_point		tile_pt;
 
-	window = rect_at(point(st->opts.scale * -SPRITE_SIZE, st->opts.scale * -SPRITE_SIZE), st->win_size.width + 2 * st->opts.scale * SPRITE_SIZE, st->win_size.height + 2 * st->opts.scale * SPRITE_SIZE);
+	window = rect_at(point(st->opts.scale * -SPRITE_SIZE,
+				st->opts.scale * -SPRITE_SIZE),
+			st->win_size.width + 2 * st->opts.scale * SPRITE_SIZE,
+			st->win_size.height + 2 * st->opts.scale * SPRITE_SIZE);
 	tile.y = 0;
 	while (tile.y < st->level.height)
 	{
